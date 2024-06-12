@@ -1,0 +1,188 @@
+.wrapper{
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 1024px;
+    padding: 1rem 10rem;
+    background-color: #fff;
+}
+.addForm{
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.addForm input{
+    width: 300px;
+    height: 50px;
+}
+.addForm textarea{
+    resize: none;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.addForm .btn{
+    all: unset;
+    border: 1px solid #ddb485;
+    width: 100px;
+    height: 50px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+}
+.basicInfo{
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddb485;
+}
+.basicInfo > div{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 1rem 3rem;
+}
+.basicInfo > label{
+    border-bottom: #ddb485 1px solid;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem 3rem;
+}
+.basicInfo > label input, .basicInfo > label textarea{
+    margin-left: 30px;
+    width: 500px;
+    border: 0;
+    border: 1px solid #ddb485;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.basicInfo > label input::placeholder, .basicInfo > label textarea::placeholder{
+    color: #aaa;
+    line-height: 1;
+}
+.basicInfo select{
+    margin: 0 10px;
+    padding: 2px;
+}
+.ingredients{
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddb485;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+}
+.ingredients > div{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.ingredients > div input{
+    margin-left: 20px;
+    border-radius: 10px;
+    border: 1px solid #aaa;
+}
+.ingredients > div input::placeholder{
+    color: #aaa;
+}
+.ingredients > div button{
+    all: unset;
+    cursor: pointer;
+}
+.steps{
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddb485;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+.steps > div{
+    display: flex;
+    flex-direction: column;
+}
+.steps > div h4{
+    padding-left: 1rem;
+}
+.steps > div:not(.steps > div:nth-last-of-type(1)){
+    border-bottom: 1px solid #ddb485;
+}
+.steps > div > div{
+    display: flex;
+    align-items: center;
+}
+.steps > div > div>div {
+    cursor: pointer;
+    margin-left: 240px;
+}
+.steps > div > div> label{
+    width: 600px;
+    padding: 10px;
+}
+.steps > div > div> button{
+    all: unset;
+    cursor: pointer;
+    margin-left: 20px;
+}
+.steps textarea{
+    border: 1px solid #aaa;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+.steps img{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ddb485;
+}
+
+
+.addForm .finishedImgs{
+    border: 1px solid #ddb485;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    height: 350px;
+}
+.addForm .finishedImgs label > div{
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+}
+.addForm .finishedImgs label > div img{
+    flex: 0;
+    cursor: pointer;
+    display: block;
+    width: 300px;
+    height: 280px;
+    border: 1px solid #ddb485;
+}
+.control-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 1rem;
+}
+.control-btns button{
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #ddb485;
+    border: 1px solid #ddb485;
+}

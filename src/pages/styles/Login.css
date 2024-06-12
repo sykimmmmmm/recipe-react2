@@ -1,0 +1,89 @@
+.loginWrapper{
+    padding: 1rem 5rem;
+    border: 1px solid #ddb485;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin: 2vw auto;
+    height: 60vh;
+    border-radius: 10px;
+    box-shadow: .1rem .1rem .1rem rgba(0, 0, 0, .2);
+    background-color: #fff;
+}
+.loginWrapper>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.loginForm{
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+.loginForm label{
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+.loginForm label:nth-last-of-type(1){
+    margin-bottom: 1.5rem;
+}
+.loginForm input{
+    margin-left: 10px;
+    width: 300px;
+    padding: 10px;
+    border: 0;
+    border-radius: 10px;
+    background-color: #ddb485;
+}
+.loginForm button{
+    all: unset;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #ddb485;
+    background-color: #fff;
+    cursor: pointer;
+}
+.loginForm button:hover{
+    background-color: #ddb485;
+    color: #fff;
+}
+.anotherLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.loginGoogle{
+    border: 1px solid #ddb485;
+    border-radius: 10px;
+    display: flex;
+    width: 300px;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+.loginGoogle:hover{
+    background-color: #ddb485;
+    color: #fff;
+}
+.loginGoogle svg{
+    font-size: 3rem;
+}
+.loginAlert{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+}

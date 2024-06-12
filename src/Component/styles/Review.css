@@ -1,0 +1,88 @@
+.review{
+    box-sizing: border-box;  
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    gap: 50px;
+}
+.review .review-product{
+    display: flex;
+    gap: 30px;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddb485;
+}
+.review .review-product .product-imgBox{
+    width: 150px;
+    height: 100px;
+}
+.product-imgBox img{
+    width: 100%;
+    height: 100%;
+}
+.review-box{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.review-box > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.review-box > div:not(.review-box>div:nth-last-child(1)){
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddb485;
+}
+.review-box textarea{
+    box-sizing: border-box;
+    width: 100%;    
+    height: 150px;
+    resize: none;
+    border: 1px solid #ddb485;
+}
+.review-box .review-rating{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+}
+.review-box .review-rating svg{
+    cursor: pointer;
+}
+.review-rating p{
+    margin-bottom: 10px;
+}
+.review-rating >div{
+    display: flex;
+    gap: 10px;
+}
+.review-img div{
+    width: 150px;
+    height: 100px;
+    cursor: pointer;
+}
+.review-img img{
+    width: 100%;
+    height: 100%;
+}
+.review-btns{
+    display: flex;
+    gap: 30px;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+}
+.review-btns button{
+    all: unset;
+    border: 1px solid #ddb485;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}

@@ -1,0 +1,141 @@
+.myPage-wrapper{
+    box-sizing: border-box;
+    width: 80%;
+    padding: 1rem 5rem;
+    margin: 2rem auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+.myPage-wrapper .myPage-itemBox{
+    border: 2px solid #ddb485;
+    width: 80%;
+}
+
+.myPage-itemBox .myPage-cat{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    border-bottom: 1px solid #ddb485;
+}
+.myPage-cat label{
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    margin: 0;
+    padding: 1rem;
+    list-style: none;
+}
+.myPage-cat label:hover,.myPage-cat label:active,
+.myPage-cat label:has(input[type='radio']:checked){
+    background-color: #ddb485;
+    color: #fff;
+}
+.myPage-cat label:not(.myPage-cat label:nth-last-child(1)){
+    border-right: 1px solid #ddb485;
+}
+.myPage-item{
+    width: 100%;
+    box-sizing: border-box;
+    height: 70vh;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.myPage-item > a{
+    height: 250px;
+}
+.myPage-item .myPage-review,
+.myPage-item .myPage-recipe{
+    flex: 0;
+    width: 230px;
+    height: 250px;
+    border: 1px solid #ddb485;
+    box-sizing: border-box;
+    box-shadow: .1rem .1rem .1rem #ddb485;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.myPage-item .myPage-review .review-goods,
+.myPage-item .myPage-recipe .recipe-goods{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+.myPage-review .review-goods .review-goodsImgBox,
+.myPage-recipe .recipe-goods .imgBox{
+    width: 150px;
+    height: 100px;
+}
+.myPage-review .review-goods .review-goodsImgBox img,
+.myPage-recipe .recipe-goods .imgBox img{
+    width: 100%;
+    height: 100%;
+}
+.myPage-review .review-goods .review-info,
+.myPage-recipe .recipe-goods .recipe-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.myPage-review .review-goods .review-info p,
+.myPage-recipe .recipe-goods .recipe-info p{
+    margin: 0;
+}
+
+.myPage-profile{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.myPage-profile .userInfo{
+    padding-top: 1rem;
+}
+.myPage-profile .userInfo p{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ddb485;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.myPage-profile >button{
+    all: unset;
+    cursor: pointer;
+    border: 1px solid #ddb485;
+    padding: 10px;
+    border-radius: 20px;
+}
+.myPage-profile > button:hover{
+    background-color: #ddb485;
+    color: #fff;
+}
+
+.recipe-btns{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.recipe-btns button{
+    all:unset;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddb485;
+    border-radius: 10px;
+}

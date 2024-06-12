@@ -1,0 +1,7 @@
+export {default as Home} from './Home'
+export {default as NotFound} from './NotFound'
+export {default as Register} from './Register'
+export {default as Mypage} from './Mypage'
+export {default as AddRecipe} from './AddRecipe'
+export {default as Recipe} from './Recipe'
+export {default as Login} from './Login'
