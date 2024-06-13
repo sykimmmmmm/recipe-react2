@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import './styles/Login.css'
 import { FcGoogle } from "react-icons/fc";
 
-axios.defaults.baseURL='http://localhost:4000'
-axios.defaults.withCredentials=true
 
 export default function Login(){
     const navigate = useNavigate()

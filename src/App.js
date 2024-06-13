@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from './Component/Header';
 import {Home, NotFound, Register, Mypage, AddRecipe, Recipe, Login} from './pages/index'
 import axios from 'axios'
@@ -6,10 +6,11 @@ import Footer from './Component/Footer';
 
 
 function App() {
+  axios.defaults.baseURL=`${process.env.REACT_APP_BASE_URL}`
   axios.defaults.withCredentials=true
   return (
     <>
-      {/* <Header/> */}
+      <Header/>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/user/register' element={<Register/>}/>
