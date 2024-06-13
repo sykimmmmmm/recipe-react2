@@ -10,7 +10,7 @@ export default function Register(){
     const fetchRegister = async(data)=>{
         const {email,name,userId,password,confirmPassword} = data
         if(email && name && userId && password && confirmPassword && password === confirmPassword){
-            const register = await axios.post('http://localhost:4000/users/register',{email,name,userId,password,confirmPassword})
+            const register = await axios.post('users/register',{email,name,userId,password,confirmPassword})
             .then(res => res.data)
             .catch(err=> err.response.data)
             if(register.code===200){
@@ -34,7 +34,7 @@ export default function Register(){
     }
     const duplicateId =async()=>{
         const { userId } = loginData
-        const confirm = await axios.post('http://localhost:4000/users/confirmUser',{userId})
+        const confirm = await axios.post('users/confirmUser',{userId})
         .then(res => res.data)
         idRef.current.innerText = confirm.msg
     }

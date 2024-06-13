@@ -20,7 +20,7 @@ export default function Header(){
     }
 
     const randomRecipe = async()=>{
-        await axios.get('http://localhost:4000/recipes/recipe-list')
+        await axios.get('recipes/recipe-list')
         .then(res => {
             navigate(`/recipe/${res.data[Math.floor(Math.random()*res.data.length)].recipeId}`)
         })
