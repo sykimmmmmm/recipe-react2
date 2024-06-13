@@ -8,7 +8,7 @@ export default function Home(){
     useEffect(()=>{
         
         fetch(`${process.env.REACT_APP_BASE_URL}`)
-        .then(res=> res.json())
+        .then(res=> res.text())
         .then(result=>{
             console.log(user)
             setUser(result)})  
