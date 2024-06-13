@@ -14,9 +14,11 @@ export default function Recipe(){
     const location = useLocation()
     const id = location.pathname.slice(8,location.pathname.length)
     const user = JSON.parse(sessionStorage.getItem('Id'))
+    const BASE_URL = process.env.REACT_APP_BASE_URL
+
     const axiosData = async()=>{
         // const id = location.pathname.slice(8,location.pathname.length)
-        const viewership = await axios.get(`http://localhost:4000/recipes/${id}`)
+        const viewership = await axios.get(`recipes/${id}`)
         .then(res => res.data.recipe)
         .catch(e=>console.log(e.response))
         setRecipeData(viewership)
@@ -54,7 +56,7 @@ export default function Recipe(){
                             {sessionStorage.getItem('I')&&user!==userId&&<div className="recipe-review" onClick={reviewPopup}>리뷰 쓰기</div>}
                             <div className="recipe-thumbnailBox">
                                 {sessionStorage.getItem('I') && user!==userId&&<div className="recipe-recommend"><IoThumbsUpSharp fill={ +localStorage.getItem(`recipe${id}${user}rc`) === 1 ?'blue' : 'white'} onClick={increaseRecommend}/></div>}
-                                <img src={`http://localhost:4000/${finishedImgs[0].path}`} alt=''/>
+                                <img src={`${BASE_URL}/${finishedImgs[0].path}`} alt=''/>
                             </div>
                             <div className="recipe-desc">
                                 <Link to={`/user/mypage/${userId}`}>
@@ -99,7 +101,7 @@ export default function Recipe(){
                                     <div className={`imgBox${i+1}`}>
                                         {cookingImgs.map((image,idx2)=>{
                                             if(image.order === i){
-                                                return <img key={idx2} src={`http://localhost:4000/${image.path}`} alt=''></img>
+                                                return <img key={idx2} src={`${BASE_URL}/${image.path}`} alt=''></img>
                                             }else{
                                                 return false
                                             }
@@ -115,7 +117,7 @@ export default function Recipe(){
                                 {finishedImgs.map((image,id)=>{
                                     return (
                                         <div key={id}>
-                                            <img src={`http://localhost:4000/${image.path}`} alt=''/>
+                                            <img src={`${BASE_URL}/${image.path}`} alt=''/>
                                         </div>
                                     )
                                 })}
@@ -148,7 +150,7 @@ export default function Recipe(){
                                             </div>
                                         </div>
                                         <div className="imgBox">
-                                            {img && <img src={`http://localhost:4000/${img}`} alt=''></img> }
+                                            {img && <img src={`${BASE_URL}/${img}`} alt=''></img> }
                                         </div>
                                     </div>
                                 )

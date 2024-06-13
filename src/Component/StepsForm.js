@@ -5,6 +5,7 @@ const StepsForm = forwardRef(({changeHandler,url},ref)=>{
     const [inputValue, setInputValue] = useState({})
     const [urlLink,setUrlLink] = useState()
     const fileRef = useRef([])
+    
     const addingredient = () =>{
         const newId = stepForm.length ? stepForm[stepForm.length-1].id + 1 : 1
         setStepForm([...stepForm,{id:newId}])

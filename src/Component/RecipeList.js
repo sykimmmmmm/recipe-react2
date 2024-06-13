@@ -9,6 +9,7 @@ import { FaStar } from "react-icons/fa6";
 export default function RecipeList(){
     const [recipeList,setRecipeList] = useState([])
     const [filter,setFilter] = useSearchParams({type:'전체',situation:'전체',process:'전체',material:'전체'})
+    const BASE_URL = process.env.REACT_APP_BASE_URL
     const orderCategory=(e)=>{
         // console.log(e.target)
         filter.set('orderby',e.target.innerText)
@@ -59,7 +60,7 @@ export default function RecipeList(){
                                 <div className="recipe-box">
                                     <div className="imgBox">
                                     {finishedImgs.length>0 ? 
-                                    <img src={`http://localhost:4000/${finishedImgs[0].path}`} alt=''/>:
+                                    <img src={`${BASE_URL}/${finishedImgs[0].path}`} alt=''/>:
                                     <img src={'/images/noImgs/no_image.gif'} alt=''/>} 
                                     </div>
                                     <div className="recipe-info">

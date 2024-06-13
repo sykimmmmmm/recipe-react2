@@ -4,7 +4,6 @@ const IngredientForm = forwardRef(({changeHandler},ref)=>{
 
     const [ingredientForm,setIngredientForm] = useState([])
     const [inputValue, setInputValue] = useState({})
-
     const addingredient = () =>{
         const newId = ingredientForm.length ? ingredientForm[ingredientForm.length-1].id + 1 : 1
         setIngredientForm([...ingredientForm,{id:newId}])
