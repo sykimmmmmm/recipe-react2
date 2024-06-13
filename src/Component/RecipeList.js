@@ -32,7 +32,8 @@ export default function RecipeList(){
                 return setRecipeList(res.data)
             })
             .catch(err=>{
-                setRecipeList(err)
+                console.log(err)
+                // setRecipeList(err)
             })
         }
     }

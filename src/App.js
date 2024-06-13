@@ -7,7 +7,6 @@ import Footer from './Component/Footer';
 
 function App() {
   axios.defaults.baseURL=`${process.env.REACT_APP_BASE_URL}`
-  axios.defaults.withCredentials=true
   return (
     <>
       <Header/>
