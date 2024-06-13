@@ -16,7 +16,7 @@ export default function RecipeList(){
     }
     const axiosData = async(filter)=>{
         if(filter.size !== 0){
-            await axios.get(`http://localhost:4000/recipes/recipe-list?${filter}`)
+            await axios.get(`/recipes/recipe-list?${filter}`)
             .then(res =>{
                 // console.log(res)
                 return setRecipeList(res.data)
@@ -25,7 +25,7 @@ export default function RecipeList(){
                 setRecipeList(err.response.data)
             })
         }else{
-            await axios.get('http://localhost:4000/recipes/recipe-list')
+            await axios.get('/recipes/recipe-list')
             .then(res =>{
                 // console.log(res)
                 return setRecipeList(res.data)
