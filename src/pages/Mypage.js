@@ -10,6 +10,7 @@ export default function Mypage(){
     const [userData,setUserData] = useState()
     const [cat,setCat] = useState('레시피')
     const location = useLocation()
+    const BASE_URL = process.env.REACT_APP_BASE_URL
 
     const axiosData= async()=>{
         const id= location.pathname.slice(13,location.pathname.length)
@@ -59,7 +60,7 @@ export default function Mypage(){
                                 <div className='myPage-recipe'>
                                     <div className='recipe-goods'>
                                         <div className='imgBox'>
-                                            <img src={`http://localhost:4000/${finishedImgs[0].path}`}></img>
+                                            <img src={`${BASE_URL}/${finishedImgs[0].path}`}></img>
                                         </div>
                                         <div className='recipe-info'>
                                             <p>{recipeTitle}</p>
@@ -92,7 +93,7 @@ export default function Mypage(){
                                 <div className='myPage-review'>
                                     <div className='review-goods'>
                                         <div className='review-goodsImgBox'>
-                                            <img src={`http://localhost:4000/${finishedImgs[0].path}`} alt=''></img>
+                                            <img src={`${BASE_URL}/${finishedImgs[0].path}`} alt=''></img>
                                         </div>
                                         <div className='review-info'>
                                             <p>{description}</p>

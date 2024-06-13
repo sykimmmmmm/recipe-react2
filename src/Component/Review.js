@@ -4,8 +4,9 @@ import { FaStar } from "react-icons/fa6";
 import axios from "axios";
 
 export default function Review({recipeId,setModal,setSuccess,reviewTitle,reviewImg}){
+    const BASE_URL = process.env.REACT_APP_BASE_URL
     if(reviewImg.includes('uploads')){
-        reviewImg = 'http://localhost:4000/'+reviewImg
+        reviewImg = BASE_URL+reviewImg
     }
     /* 별점 */
     const [selectedRating, setSelectedRating] = useState(null);
