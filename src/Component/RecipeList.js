@@ -22,7 +22,8 @@ export default function RecipeList(){
                 return setRecipeList(res.data)
             })
             .catch(err=>{
-                setRecipeList(err.response.data)
+                console.log(err)
+                // setRecipeList(err.response.data)
             })
         }else{
             await axios.get('recipes/recipe-list')
