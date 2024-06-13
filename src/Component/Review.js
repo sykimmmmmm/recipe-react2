@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Review({recipeId,setModal,setSuccess,reviewTitle,reviewImg}){
     const BASE_URL = process.env.REACT_APP_BASE_URL
     if(reviewImg.includes('uploads')){
-        reviewImg = BASE_URL+reviewImg
+        reviewImg = BASE_URL+'/'+reviewImg
     }
     /* 별점 */
     const [selectedRating, setSelectedRating] = useState(null);

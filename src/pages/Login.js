@@ -21,7 +21,6 @@ export default function Login(){
             .then(res=> {
                 const {code,token,userId} =res.data
                 console.log(res.data)
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
                 if(code === 200){
                     alert('로그인되었습니다')
                     sessionStorage.setItem('Id',JSON.stringify(userId))
