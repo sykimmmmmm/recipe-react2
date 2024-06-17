@@ -74,7 +74,7 @@ export default function AddRecipe(){
             let ingredient = target.ingredient !== '' ? target.ingredient : ' '
             let quantity = target.quantity !== '' ? target.quantity : ' '
             let unit = target.unit !== '' ? target.unit : ' '
-            if(target.ingredient === ''||target.quantity === ''||target.unit === ''){
+            if(ingredient === ''||quantity === ''||unit === ''){
                 value = 'undefined'
             }else{
                 value = ingredient+''+quantity+''+unit
@@ -162,7 +162,7 @@ export default function AddRecipe(){
                     </label>
                     <label>
                         요리설명:
-                        <textarea maxLength={100} cols={50} rows={3} type={'text'} placeholder='간단한 요리설명을 입력하세요' name='description' defaultValue={''}/>
+                        <textarea maxLength={500} cols={50} rows={3} type={'text'} placeholder='간단한 요리설명을 입력하세요' name='description' defaultValue={''}/>
                     </label>
                     <div>
                         요리정보
