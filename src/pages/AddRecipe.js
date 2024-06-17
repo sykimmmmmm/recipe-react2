@@ -182,8 +182,8 @@ export default function AddRecipe(){
                 <IngredientForm changeHandler={handleInputChange}ref={inputRef}></IngredientForm>
                 <StepsForm changeHandler={stepsInputChange} ref={stepsRef} url={urlLink}/>
                 <div className='finishedImgs'>
-                    <label>완성된 사진 추가
-                        <input type={'file'} hidden accept={'image/*'} name={'finishedImgs'} onChange={previewImgs} ref={finishedRef} multiple ></input>
+                    <label>완성된 사진 추가(테스트사이트로 한개만 추가가능합니다)
+                        <input type={'file'} hidden accept={'image/*'} name={'finishedImgs'} onChange={previewImgs} ref={finishedRef} ></input>
                         <div onClick={openFile}>
                             {finishedImages.length>0 ? 
                                 <>
