@@ -14,7 +14,7 @@ const material = ['소고기','돼지고기','닭고기','육류','채소류','�
 
 export default function AddRecipe(){
     const [recipeData,setRecipeData] = useState({'recipeTitle':'','name':'','description':'','people':'','time':'','difficult':'','ingredients0':'','steps':'','type':'','situation':'','process':'','material':''})
-    const recipeRef = useRef({'recipeTitle':'','name':'','description':'','people':'','time':'','difficult':'','type':'','situation':'','process':'','material':''})
+    const recipeRef = useRef({'recipeTitle':'','description':'','people':'','time':'','difficult':'','type':'','situation':'','process':'','material':''})
     const navigate = useNavigate()
     // 레시피 정보 입력
     const inputRecipe = (e)=>{
