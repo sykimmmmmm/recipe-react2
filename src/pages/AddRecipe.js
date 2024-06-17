@@ -4,6 +4,7 @@ import axios from 'axios'
 import './styles/AddRecipe.css'
 import StepsForm from '../Component/StepsForm';
 import { useNavigate } from 'react-router-dom';
+import Selection from '../Component/Selection';
 const people = ['1인분','2인분','3인분','4인분','5인분','6인분 이상']
 const time = ['5분 이내','10분 이내','15분 이내','20분 이내','30분 이내','60분 이내','90분 이내','2시간 이내','2시간 이상']
 const difficult = ['누구나 가능','쉬움','보통','어려움','매우 어려움']
@@ -107,7 +108,6 @@ export default function AddRecipe(){
     useEffect(()=>{
         const recipeSave = async()=>{
             const token = JSON.parse(atob(sessionStorage.getItem('I')))
-            let message = ''
             const cookingImgs = []            
             const finishedImgs = []
             const fd = new FormData()//이미지 서버저장
@@ -130,11 +130,7 @@ export default function AddRecipe(){
             })
             .catch(e=>{
                 console.log(e)
-                message = e.response.data.message
             })
-            if(message !== ''){
-                return alert(message)
-            }
             // console.log(imgs)
             const {recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open,ingredients} = recipeData
             await axios.post('/recipes/add-recipe',{
@@ -171,71 +167,15 @@ export default function AddRecipe(){
                     <div>
                         요리정보
                         <div>
-                            <label>
-                                인원
-                                <select defaultValue={''} name='people' >
-                                    <option value=''>인원</option>
-                                    {people.map((p,id)=>{
-                                        return <option key={id} value={p}>{p}</option>
-                                    })}
-                                </select>
-                            </label>
-                            <label>
-                                시간
-                                <select defaultValue={''} name='time'>
-                                    <option value=''>시간</option>
-                                    {time.map((t,id)=>{
-                                        return <option key={id} value={t}>{t}</option>
-                                    })}
-                                </select>
-                            </label>
-                            <label>
-                                 난이도
-                                <select defaultValue={''} name='difficult'>
-                                    <option value={''}>난이도</option>
-                                    {difficult.map((diff,id)=>{
-                                        return <option key={id} value={diff}>{diff}</option>
-                                    })}
-                                </select>
-                            </label>
+                            <Selection child={'인원'} name='people' data={people}/>
+                            <Selection child={'시간'} name='time' data={time}/>
+                            <Selection child={'난이도'} name='difficult' data={difficult}/>
                         </div>
                         <div>
-                            <label>
-                                종류별:
-                                <select defaultValue={''} name='type'>
-                                    <option value={''}>종류별</option>
-                                    {type.map((ty,id)=>{
-                                        return <option value={ty} key={id}>{ty}</option>
-                                    })}
-                                </select>    
-                            </label>    
-                            <label>
-                                상황별:
-                                <select defaultValue={''} name='situation'>
-                                    <option value={''}>상황별</option>   
-                                    {situation.map((sit,id)=>{
-                                        return <option value={sit} key={id}>{sit}</option>
-                                    })}
-                                </select>    
-                            </label>    
-                            <label>
-                                방법별:
-                                <select defaultValue={''} name='process'>
-                                    <option value={''}>방법별</option>   
-                                    {process.map((pro,id)=>{
-                                        return <option value={pro} key={id}>{pro}</option>
-                                    })}
-                                </select>    
-                            </label>    
-                            <label>
-                                재료별:
-                                <select defaultValue={''} name='material'>
-                                    <option value={''}>재료별</option>   
-                                    {material.map((mat,id)=>{
-                                        return <option value={mat} key={id}>{mat}</option>
-                                    })}
-                                </select>    
-                            </label>    
+                            <Selection child={'종류별'} name='type' data={type}/>
+                            <Selection child={'상황별'} name='situation' data={situation}/>
+                            <Selection child={'방법별'} name='process' data={process}/>
+                            <Selection child={'재료별'} name='material' data={material}/>
                         </div>  
                     </div>
                 </div>

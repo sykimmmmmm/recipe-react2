@@ -7,6 +7,9 @@ const StepsForm = forwardRef(({changeHandler,url},ref)=>{
     const fileRef = useRef([])
     
     const addingredient = () =>{
+        if(stepForm.length>3){
+            return alert('무료 배포 사이트 제한으로 최대 3개만 만들수 있습니다')
+        }
         const newId = stepForm.length ? stepForm[stepForm.length-1].id + 1 : 1
         setStepForm([...stepForm,{id:newId}])
         Object.values(ref.current).length>0 ?
@@ -52,20 +55,15 @@ const StepsForm = forwardRef(({changeHandler,url},ref)=>{
             // delete newvalues[id+1]
             keys.forEach((key)=>{
                 if(+key>id){
-                    console.log(newvalues[key])
                     newvalues[key] = {...newvalues[+key+1],['order']:+key}
                 }
                 if(+key===keys.length-1){   
-                    console.log('dd')
                     delete newvalues[key]
                 }
-                console.log(newvalues[key])
             })
-            console.log(newvalues)
             return newvalues
         }
         ref.current = deleteRef(ref.current,id)
-        console.log(ref.current)
 
         for(let i in ref.current){
             changeHandler(i,'file',ref.current[i].file)
