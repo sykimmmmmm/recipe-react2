@@ -136,9 +136,9 @@ export default function AddRecipe(){
                 return alert(message)
             }
             // console.log(imgs)
-            const {recipeTitle,name,description,people,time,difficult,steps,type,situation,process,material,open,ingredients} = recipeData
+            const {recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open,ingredients} = recipeData
             await axios.post('/recipes/add-recipe',{
-                recipeTitle,name,description,info:[people,time,difficult],ingredients,steps,category:[type,situation,process,material],open,cookingImgs,finishedImgs
+                recipeTitle,description,info:[people,time,difficult],ingredients,steps,category:[type,situation,process,material],open,cookingImgs,finishedImgs
             },{headers:{Authorization:`Bearer ${token}`}})
             .then(res => {
                 const {message} = res.data
@@ -163,10 +163,6 @@ export default function AddRecipe(){
                     <label>
                         레시피제목:
                         <input type={'text'} placeholder='레시피제목을 입력하세요' name='recipeTitle' defaultValue={''}/>
-                    </label>
-                    <label>
-                        요리명:
-                        <input type={'text'} placeholder='요리이름을 입력하세요' name='name' defaultValue={''}/>
                     </label>
                     <label>
                         요리설명:

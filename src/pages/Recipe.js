@@ -101,7 +101,7 @@ export default function Recipe(){
                                     <div className={`imgBox${i+1}`}>
                                         {cookingImgs.map((image,idx2)=>{
                                             if(image.order === i){
-                                                return <img key={idx2} src={`${BASE_URL}/${image.path}`} alt=''></img>
+                                                return <img key={idx2} src={`${image.path}`} alt=''></img>
                                             }else{
                                                 return false
                                             }
