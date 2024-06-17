@@ -13,7 +13,7 @@ const process = ['볶음','끓이기','부침','조림','무침','비빔','찜',
 const material = ['소고기','돼지고기','닭고기','육류','채소류','해물류','달걀/유제품','가공식품류','쌀','밀가루','건어물류','버섯류','과일류','콩/견과류','곡류','기타']
 
 export default function AddRecipe(){
-    const [recipeData,setRecipeData] = useState({'recipeTitle':'','name':'','description':'','people':'','time':'','difficult':'','ingredients0':'','steps':'','type':'','situation':'','process':'','material':''})
+    const [recipeData,setRecipeData] = useState({'recipeTitle':'','description':'','people':'','time':'','difficult':'','ingredients0':'','steps':'','type':'','situation':'','process':'','material':''})
     const recipeRef = useRef({'recipeTitle':'','description':'','people':'','time':'','difficult':'','type':'','situation':'','process':'','material':''})
     const navigate = useNavigate()
     // 레시피 정보 입력
@@ -91,11 +91,11 @@ export default function AddRecipe(){
             steps.push(value)
         })
         if(validateValue(recipeRef.current)&&validateValue(ingredients)&&validateValue(steps)){
-            const {recipeTitle,name,description,people,time,difficult,type,situation,process,material} = recipeRef.current
+            const {recipeTitle,description,people,time,difficult,type,situation,process,material} = recipeRef.current
             if(e.target.name === 'save'){
-                setRecipeData({recipeTitle,name,description,people,time,difficult,steps,type,situation,process,material,open:false,ingredients:ingredients})
+                setRecipeData({recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open:false,ingredients:ingredients})
             }else if(e.target.name === 'upload'){
-                setRecipeData({recipeTitle,name,description,people,time,difficult,steps,type,situation,process,material,open:true,ingredients:ingredients})
+                setRecipeData({recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open:true,ingredients:ingredients})
             }
         }else{
             return alert('빠진 항목이있습니다')
