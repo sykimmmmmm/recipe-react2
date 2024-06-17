@@ -5,10 +5,10 @@ const IngredientForm = forwardRef(({changeHandler},ref)=>{
     const [ingredientForm,setIngredientForm] = useState([])
     const [inputValue, setInputValue] = useState({})
     const addingredient = () =>{
-        if(ingredientForm.length>3){
+        const newId = ingredientForm.length ? ingredientForm[ingredientForm.length-1].id + 1 : 1
+        if(newId>=2){
             return alert('테스트 사이트로 최대 3개까지 추가할 수 있습니다.')
         }
-        const newId = ingredientForm.length ? ingredientForm[ingredientForm.length-1].id + 1 : 1
         setIngredientForm([...ingredientForm,{id:newId}])
         Object.values(ref.current).length>0 ?
         setInputValue(values => ({
