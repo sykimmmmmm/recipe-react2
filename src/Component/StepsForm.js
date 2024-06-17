@@ -8,7 +8,7 @@ const StepsForm = forwardRef(({changeHandler,url},ref)=>{
     
     const addingredient = () =>{
         const newId = stepForm.length ? stepForm[stepForm.length-1].id + 1 : 1
-        if(newId >= 2){
+        if(newId >= 3){
             return alert('무료 배포 사이트 제한으로 최대 3개만 만들수 있습니다')
         }
         setStepForm([...stepForm,{id:newId}])
