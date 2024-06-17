@@ -56,7 +56,7 @@ export default function Recipe(){
                             {sessionStorage.getItem('I')&&user!==userId&&<div className="recipe-review" onClick={reviewPopup}>리뷰 쓰기</div>}
                             <div className="recipe-thumbnailBox">
                                 {sessionStorage.getItem('I') && user!==userId&&<div className="recipe-recommend"><IoThumbsUpSharp fill={ +localStorage.getItem(`recipe${id}${user}rc`) === 1 ?'blue' : 'white'} onClick={increaseRecommend}/></div>}
-                                <img src={`${BASE_URL}/${finishedImgs[0].path}`} alt=''/>
+                                <img src={`${finishedImgs[0].path}`} alt=''/>
                             </div>
                             <div className="recipe-desc">
                                 <Link to={`/user/mypage/${userId}`}>
@@ -117,7 +117,7 @@ export default function Recipe(){
                                 {finishedImgs.map((image,id)=>{
                                     return (
                                         <div key={id}>
-                                            <img src={`${BASE_URL}/${image.path}`} alt=''/>
+                                            <img src={`${image.path}`} alt=''/>
                                         </div>
                                     )
                                 })}
