@@ -42,7 +42,7 @@ export default function Register(){
         const {name,value} = e.target
         setLoginData({...loginData,[name]:value})
     }
-
+    console.log(loginData)
     return(
         <div className="register-wrapper">
             <div>

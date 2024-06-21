@@ -1,10 +1,14 @@
 import React,{useEffect, useRef, useState} from 'react';
-import IngredientForm from '../Component/IngredientForm';
-import axios from 'axios'
-import './styles/AddRecipe.css'
-import StepsForm from '../Component/StepsForm';
 import { useNavigate } from 'react-router-dom';
-import Selection from '../Component/Selection';
+import './styles/AddRecipe.css'
+import axios from 'axios'
+import IngredientForm from '../Component/Recipe/IngredientForm';
+import StepsForm from '../Component/Recipe/StepsForm';
+import Selection from '../Component/Recipe/Selection';
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { ingredientFormAtom, stepsFormAtom, finishedImagesAtom } from "../Recoil/recipeAtom";
+import FinishImg from '../Component/Recipe/FinishImg';
+
 const people = ['1인분','2인분','3인분','4인분','5인분','6인분 이상']
 const time = ['5분 이내','10분 이내','15분 이내','20분 이내','30분 이내','60분 이내','90분 이내','2시간 이내','2시간 이상']
 const difficult = ['누구나 가능','쉬움','보통','어려움','매우 어려움']
@@ -14,113 +18,65 @@ const process = ['볶음','끓이기','부침','조림','무침','비빔','찜',
 const material = ['소고기','돼지고기','닭고기','육류','채소류','해물류','달걀/유제품','가공식품류','쌀','밀가루','건어물류','버섯류','과일류','콩/견과류','곡류','기타']
 
 export default function AddRecipe(){
-    const [recipeData,setRecipeData] = useState({'recipeTitle':'','description':'','people':'','time':'','difficult':'','ingredients0':'','steps':'','type':'','situation':'','process':'','material':''})
-    const recipeRef = useRef({'recipeTitle':'','description':'','people':'','time':'','difficult':'','type':'','situation':'','process':'','material':''})
     const navigate = useNavigate()
-    // 레시피 정보 입력
+    // 레시피 기본정보 입력
+    const [recipeBasicInfo,setRecipeBasicInfo] = useState({})
     const inputRecipe = (e)=>{
         let {name, value} = e.target
-        recipeRef.current = {...recipeRef.current,[name]:value}
+        setRecipeBasicInfo({...recipeBasicInfo,[name]:value})
     }
+
     //ingredientForm 정보 저장
-    const inputRef = useRef({0:{ingredient:'',quantity:'',unit:''}})
-    const handleInputChange = (id, field, value) => {
-        inputRef.current=({...inputRef.current,[id]: (inputRef.current[id]?{...inputRef.current[id],[field]: value}:{[field]:value})})
-    }
+    const ingredientForm = useRecoilValue(ingredientFormAtom)
+
     // stepsForm 정보 저장
-    const stepsRef = useRef({0:{steps:'',file:'',order:''}})
-    // stepsForm 이미지 첨부시 프리뷰
-    const [urlLink,setUrlLink] = useState()
-    const [prevFile,setPrevFile] = useState({})
-    const stepsInputChange = (id, field, value) => {
-        stepsRef.current=({...stepsRef.current,[id]: (stepsRef.current[id]?{...stepsRef.current[id],['order']:id,[field]: value}:{[field]:value})})
-        const keys = Object.keys(stepsRef.current)
-        const file = stepsRef.current[id].file
-        keys.map((key)=>{
-            if(stepsRef.current[key].file === ''){
-                return stepsRef.current[key].order = undefined
-            } 
-            return
-        })
-        if(stepsRef.current[id].file && prevFile[id] !== stepsRef.current[id].file.name){
-            setPrevFile({...prevFile,[id]:stepsRef.current[id].file.name})
-            setUrlLink({...urlLink,[id]:{src: file&&file!=='undefined' && URL.createObjectURL(file)}})
-        }
-    }
+    const stepsForm = useRecoilValue(stepsFormAtom)
+
     /* 이미지 저장 */
-    const finishedRef = useRef()
-    const [finishedImages,setFinishedImages] = useState([])
-    const imgs = [...finishedImages]
-    const previewImgs = ()=>{
-        const images = finishedRef.current.files
-        for(let i =0; i<images.length;i++){
-            imgs.push({file:images[i],url:URL.createObjectURL(images[i])})
-        }
-        setFinishedImages(imgs)
-    }
-    const openFile = (e)=>{
-        e.preventDefault()
-        finishedRef.current.click()
-    }
-    //레시피 만들기 레시피데이터 저장
-    const createRecipe = async(e)=>{
+    const finishedImages = useRecoilValue(finishedImagesAtom)
+
+    // 레시피 데이터 병합
+    const [allData,setAllData]= useState({})
+    // //레시피 만들기 레시피데이터 저장
+    const createRecipe = (e)=>{
         e.stopPropagation()
         // 재료정보 결합
-        const keys = Object.keys(inputRef.current)
-        const ingredients = []
-        keys.forEach((key)=>{
-            let target = inputRef.current[key]
-            let value = ''
-            let ingredient = target.ingredient !== '' ? target.ingredient : ' '
-            let quantity = target.quantity !== '' ? target.quantity : ' '
-            let unit = target.unit !== '' ? target.unit : ' '
-            if(ingredient === ''||quantity === ''||unit === ''){
-                value = 'undefined'
-            }else{
-                value = ingredient+''+quantity+''+unit
-            }
-            ingredients.push(value)
+        const newIngredients = ingredientForm.map(ingredients=>{
+            let {ingredient,quantity,unit} = ingredients
+            return ingredient + quantity + unit
         })
         // 조리순서
-        const stepsKey = Object.keys(stepsRef.current)
-        const steps=[]
-        stepsKey.forEach((key,id)=>{
-            let target = stepsRef.current[key]
-            let value = ''
-            if(target.steps === ''){value = 'undefined'}
-            else{value= target.steps}
-            steps.push(value)
+        const newSteps= stepsForm.map(steps=>{
+            return steps.steps
         })
-        if(validateValue(recipeRef.current)&&validateValue(ingredients)&&validateValue(steps)){
-            const {recipeTitle,description,people,time,difficult,type,situation,process,material} = recipeRef.current
+        
+        if(validateValue(newIngredients)&&validateValue(newSteps)){
+            const {recipeTitle,description,people,time,difficult,type,situation,process,material} = recipeBasicInfo
             if(e.target.name === 'save'){
-                setRecipeData({recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open:false,ingredients:ingredients})
+                setAllData({recipeTitle,description,people,time,difficult,steps:newSteps,type,situation,process,material,open:false,ingredients:newIngredients})
             }else if(e.target.name === 'upload'){
-                setRecipeData({recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open:true,ingredients:ingredients})
+                setAllData({recipeTitle,description,people,time,difficult,steps:newSteps,type,situation,process,material,open:true,ingredients:newIngredients})
             }
         }else{
             return alert('빠진 항목이있습니다')
         }
     } 
-
-
     // 레시피데이터가 저장되면 레시피 db로 저장
     useEffect(()=>{
         const recipeSave = async()=>{
             const token = JSON.parse(atob(sessionStorage.getItem('I')))
             const cookingImgs = []            
             const finishedImgs = []
-            const fd = new FormData()//이미지 서버저장
-            for(let i in stepsRef.current){
-                fd.append('recipeImage',stepsRef.current[i].file)
-                fd.append('id',stepsRef.current[i].order)
-            }
-            finishedImages.forEach(img=>{
-                fd.append('finishedImgs',img.file)
+            const formData = new FormData()
+            stepsForm.forEach(steps=>{
+                formData.append('recipeImages',steps.files)
+                formData.append('order',steps.order)            
             })
+            finishedImages && formData.append('finishedImgs',finishedImages)
             // console.log(stepsRef.current[0])
-            await axios.post('recipes/upload',fd,{headers:{'Content-Type':'multipart/form-data','Authorization':`Bearer ${token}`}})
+            await axios.post('recipes/upload',formData,{headers:{'Content-Type':'multipart/form-data','Authorization':`Bearer ${token}`}})
             .then(res => {
+                console.log(res)
                 res.data.cookingImgs && res.data.cookingImgs.forEach(data=>{
                     cookingImgs.push(data.value)
                 })
@@ -132,30 +88,30 @@ export default function AddRecipe(){
                 console.log(e)
             })
             // console.log(imgs)
-            const {recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open,ingredients} = recipeData
-            await axios.post('/recipes/add-recipe',{
-                recipeTitle,description,info:[people,time,difficult],ingredients,steps,category:[type,situation,process,material],open,cookingImgs,finishedImgs
-            },{headers:{Authorization:`Bearer ${token}`}})
-            .then(res => {
-                const {message} = res.data
-                // console.log(res.data)
-                alert(message)
-                navigate('/')
-            })
-            .catch(e=>{
-                console.log(e)
-            })
+            // const {recipeTitle,description,people,time,difficult,steps,type,situation,process,material,open,ingredients} = allData
+            // await axios.post('/recipes/add-recipe',{
+            //     recipeTitle,description,info:[people,time,difficult],ingredients,steps,category:[type,situation,process,material],open,cookingImgs,finishedImgs
+            // },{headers:{Authorization:`Bearer ${token}`}})
+            // .then(res => {
+            //     const {message} = res.data
+            //     // console.log(res.data)
+            //     alert(message)
+            //     navigate('/')
+            // })
+            // .catch(e=>{
+            //     console.log(e)
+            // })
         }
-        if(validateValue(recipeData)){
+        if(validateValue(allData)){
             recipeSave()
         }
-    },[recipeData,stepsRef])
+    },[allData])
 
     return(
         <div className='wrapper'>
             <h2>레시피 등록</h2>
-            <div className='addForm' onChange={inputRecipe}>
-                <div className="basicInfo">
+            <div className='addForm' >
+                <div className="basicInfo" onChange={inputRecipe}>
                     <label>
                         레시피제목:
                         <input type={'text'} placeholder='레시피제목을 입력하세요' name='recipeTitle' defaultValue={''}/>
@@ -179,28 +135,9 @@ export default function AddRecipe(){
                         </div>  
                     </div>
                 </div>
-                <IngredientForm changeHandler={handleInputChange}ref={inputRef}></IngredientForm>
-                <StepsForm changeHandler={stepsInputChange} ref={stepsRef} url={urlLink}/>
-                <div className='finishedImgs'>
-                    <label>완성된 사진 추가(테스트사이트로 한개만 추가가능합니다)
-                        <input type={'file'} hidden accept={'image/*'} name={'finishedImgs'} onChange={previewImgs} ref={finishedRef} ></input>
-                        <div onClick={openFile}>
-                            {finishedImages.length>0 ? 
-                                <>
-                                    {finishedImages.map((image,id)=>{
-                                        return(
-                                            <img key={id} src={image.url}></img>
-                                        )
-                                    })}
-                                    <img src='./images/etc/addImage.png' alt='+'/>
-                                </>
-                                :
-                            <div>
-                                <img src='./images/etc/addImage.png' alt='사진을 추가해주세요'/>
-                            </div>}
-                        </div>
-                    </label>
-                </div>
+                <IngredientForm></IngredientForm>
+                <StepsForm></StepsForm>
+                <FinishImg/>
             </div>
             <div className="control-btns">
                 <button name='save' onClick={createRecipe}>레시피 저장</button>
